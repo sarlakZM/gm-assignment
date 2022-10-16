@@ -1,0 +1,40 @@
+form {
+  display: grid;
+  padding: 2em 0;
+  width: 100%;
+  max-width: 300px;
+  justify-content: space-around;
+  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+  margin: 4em auto;
+  .form-row{
+    box-sizing: border-box;
+    width: 100%;
+    padding: .5rem;
+        
+  }
+  button {
+      background-color: #eee;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: black;
+      font-size: 1rem;
+      padding: .5rem;
+    }
+    button:hover {
+      background-color: black;
+      color: white;
+    }
+    button:disabled {
+      background-color: #eee;
+      color: #aaa;
+      cursor: auto;
+    }
+
+}
+
+.form-result{
+  display: grid;
+  justify-content: space-around;
+ 
+}

@@ -1,0 +1,21 @@
+<div *ngIf="form" [formGroup]="form">
+    <label [attr.for]="field.key">{{field.label}}</label>
+    <div [ngSwitch]="field.controlType">
+  
+      <input *ngSwitchCase="'textbox'" 
+              [formControlName]="field.key"
+              [hidden]="field.hidden"
+              [id]="field.key" 
+              [type]="field.type">
+  
+      <input *ngSwitchCase="'checkbox'" 
+                [formControlName]="field.key"
+                [hidden]="field.hidden"
+                [id]="field.key" 
+                [type]="field.type"
+                (change)="onChangeConfrim($event)">
+    </div>
+  
+    <div class="errorMessage" *ngIf="!isValid">{{field.label}} is required</div>
+  </div>
+  
