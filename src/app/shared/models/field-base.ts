@@ -6,7 +6,7 @@ export class FieldBase<T> {
   hidden: boolean;
   controlType: string;
   type: string;
-
+  errors: string
   constructor(
     options: {
       value?: T;
@@ -24,7 +24,8 @@ export class FieldBase<T> {
     this.required = !!options.mandatory;
     this.hidden = options.hidden === 'true' ? true : false;
     this.controlType = options.controlType || '';
-    this.type = options.type || ' `';
+    this.type = options.type || '';
+    this.errors = '';
   }
 }
 

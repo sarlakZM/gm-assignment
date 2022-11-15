@@ -5,7 +5,9 @@ import { Checkbox, FieldBase, Textbox } from '../models/field-base';
 
 import * as data from '../../../assets/to-render.json';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class JsonFieldsService {
   getJsonFields(): FieldBase<string>[] {
     const jsonfields: JsonFieldModel[] = (data as any).default;

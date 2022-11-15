@@ -17,8 +17,6 @@ import { SharedModule } from '../shared/shared.module';
   selector: 'app-your-page',
   standalone: true,
   imports: [CommonModule, SharedModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './your-page.component.html',
   styleUrls: ['./your-page.component.scss']
 })

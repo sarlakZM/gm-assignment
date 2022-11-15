@@ -46,11 +46,26 @@ describe('DynamicFormComponent', () => {
     fixture.detectChanges();
     const nameField = fixture.debugElement.query(By.css('#name'));
     expect(nameField).toBeTruthy();
-    expect(component.isValid).toBeFalsy();
 
+    nameField.nativeNode.dispatchEvent(new Event('input')) ;
+    expect(component.isValid).toBeFalsy();
+    //Or
+    expect(component.form.valid).toBeFalsy();
+
+    let  errors = component.form.controls['name'].errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    //setting value for name
     component.field = { ...fields[0], value: 'Gerimedica' };
     component.form = formControlService.toFormGroup([component.field]);
+    //Or
+    component.form.patchValue(component.field);
+
+    errors = component.form.controls['name'].errors || {};
+    expect(component.form.valid).toBeTruthy();
     expect(component.isValid).toBeTruthy();
+    expect(errors['required']).toBeFalsy();
+
   });
 
   it('Check the rendered email field in form', () => {
@@ -59,13 +74,45 @@ describe('DynamicFormComponent', () => {
     component.field = fields[1];
     component.form = formControlService.toFormGroup([component.field]);
     fixture.detectChanges();
-    const emailField = fixture.debugElement.query(By.css('#email'));
-    expect(emailField).toBeTruthy();
-    expect(component.isValid).toBeFalsy();
+  
+    let emailElement = fixture.debugElement.query(By.css('#email'));
+    emailElement.nativeElement.dispatchEvent(new Event('input')) ;
 
-    component.field = { ...fields[0], value: 'gerimedica@gmail.com' };
+
+    expect(emailElement).toBeTruthy();
+    expect(component.isValid).toBeFalsy();
+    //Or
+    expect(component.form.valid).toBeFalsy();
+    expect(emailElement.nativeElement.innerText).toEqual('');
+
+    let emailField = component.form.controls['email'];
+    let  errors = emailField.errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    //setting invalid email 
+    component.field = { ...fields[1], value: 'Not Valid Email' };
     component.form = formControlService.toFormGroup([component.field]);
+    fixture.detectChanges();
+    emailElement.nativeElement.dispatchEvent(new Event('input')) ;
+    expect(component.isValid).toBeFalsy();
+    expect(component.form.valid).toBeFalsy()
+    emailField = component.form.controls['email']
+    errors = emailField.errors || {};
+    expect(errors['email']).toBeTruthy();
+    expect(errors['required']).toBeUndefined();
+
+    //setting invalid email 
+    component.field = { ...fields[1], value: 'correct@gmail.com' };
+    component.form = formControlService.toFormGroup([component.field]);
+    fixture.detectChanges();
+    emailElement.nativeElement.dispatchEvent(new Event('input')) ;
     expect(component.isValid).toBeTruthy();
+    expect(component.form.valid).toBeTruthy()
+    emailField = component.form.controls['email']
+    errors = emailField.errors || {};
+    expect(errors['email']).toBeUndefined();
+
+
   });
 
   it('Check the rendered checkbox field in form', () => {

@@ -15,6 +15,5 @@ import { JsonFieldsService } from './services/json-fields-servcie';
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [RouterModule, ReactiveFormsModule, DynamicFormComponent],
   providers: [JsonFieldsService, FormControlService],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class SharedModule {}

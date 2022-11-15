@@ -8,7 +8,7 @@ form {
   margin: 4em auto;
   .form-row{
     box-sizing: border-box;
-    width: 100%;
+    width: 100% !important;
     padding: .5rem;
         
   }
@@ -20,7 +20,8 @@ form {
       color: black;
       font-size: 1rem;
       padding: .5rem;
-    }
+    };
+    
     button:hover {
       background-color: black;
       color: white;

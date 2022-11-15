@@ -1,10 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { FieldBase, Textbox } from '../models/field-base';
 import { FormControlService } from './form-control.service';
 
-describe('BaseMultiService', () => {
+describe('FormControlService', () => {
   let service: FormControlService;
 
   beforeEach(() => {
@@ -18,7 +16,7 @@ describe('BaseMultiService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Create team', async () => {
+  it('toFormGroup return value form when the user has been called it', () => {
     const fields: FieldBase<any>[] = [
       new Textbox({
         field: 'name',
@@ -35,5 +33,6 @@ describe('BaseMultiService', () => {
     ).and.returnValue(expectedResult);
     service.toFormGroup(fields);
     expect(spytoFormGroup).toHaveBeenCalledWith(fields);
+    expect(service.toFormGroup).toHaveBeenCalled();
   });
 });
